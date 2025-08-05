@@ -27,6 +27,20 @@ export default function Order() {
     setLoading(false);
   }
 
+  async function checkout() {
+    setLoading(true);
+    await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart }),
+    });
+
+    setCart([]);
+    setLoading(false);
+  }
+
   useEffect(() => {
     fetchPizzaTypes();
   }, []);
@@ -94,7 +108,7 @@ export default function Order() {
                     checked={pizzaSize === "L"}
                     onChange={(e) => setPizzaSize(e.target.value)}
                   />
-                  <label htmlFor="pizza-l">Medium</label>
+                  <label htmlFor="pizza-l">Large</label>
                 </span>
               </div>
             </div>
@@ -117,7 +131,7 @@ export default function Order() {
         </form>
       </div>
 
-      {!loading ? <Cart cart={cart} checkout={() => {}} /> : "Loading..."}
+      {!loading ? <Cart cart={cart} checkout={checkout} /> : "Loading..."}
     </div>
   );
 }
