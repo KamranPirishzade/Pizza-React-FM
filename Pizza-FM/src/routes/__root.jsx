@@ -6,6 +6,7 @@ import Header from "../Header";
 import { CartContext } from "../contexts";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ErrorBoundary from "../ErrorBoundary";
 
 const queryClient = new QueryClient();
 
@@ -14,15 +15,17 @@ export const Route = createRootRoute({
     const cartHook = useState([]);
     return (
       <>
-        <QueryClientProvider client={queryClient}>
-          <CartContext.Provider value={cartHook}>
-            <Header />
-            <Outlet />
-            <PizzaOfTheDay />
-          </CartContext.Provider>
-          <TanStackRouterDevtools />
-          <ReactQueryDevtools />
-        </QueryClientProvider>
+        <ErrorBoundary>
+          <QueryClientProvider client={queryClient}>
+            <CartContext.Provider value={cartHook}>
+              <Header />
+              <Outlet />
+              <PizzaOfTheDay />
+            </CartContext.Provider>
+            <TanStackRouterDevtools />
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </ErrorBoundary>
       </>
     );
   },
