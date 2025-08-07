@@ -1,7 +1,4 @@
-const intl = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import useCurrency from "./useCurrency";
 
 const Cart = ({ cart, checkout }) => {
   let total = cart.reduce((initial, item) => {
@@ -20,7 +17,7 @@ const Cart = ({ cart, checkout }) => {
           </li>
         ))}
       </ul>
-      <p>Total:{intl.format(total)}</p>
+      <p>Total:{useCurrency(total)}</p>
       <button onClick={checkout}>Checkout</button>
     </div>
   );

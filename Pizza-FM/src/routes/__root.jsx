@@ -4,18 +4,25 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import PizzaOfTheDay from "../PizzaOfTheDay";
 import Header from "../Header";
 import { CartContext } from "../contexts";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 export const Route = createRootRoute({
   component: () => {
     const cartHook = useState([]);
     return (
       <>
-        <CartContext.Provider value={cartHook}>
-          <Header />
-          <Outlet />
-          <PizzaOfTheDay />
-        </CartContext.Provider>
-        <TanStackRouterDevtools />
+        <QueryClientProvider client={queryClient}>
+          <CartContext.Provider value={cartHook}>
+            <Header />
+            <Outlet />
+            <PizzaOfTheDay />
+          </CartContext.Provider>
+          <TanStackRouterDevtools />
+          <ReactQueryDevtools />
+        </QueryClientProvider>
       </>
     );
   },

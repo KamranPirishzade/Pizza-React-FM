@@ -3,11 +3,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { CartContext } from "../contexts";
 import Cart from "../Cart";
 import Pizza from "../Pizza";
-
-const intl = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import useCurrency from "../useCurrency";
 
 export const Route = createLazyFileRoute("/order")({
   component: Order,
@@ -23,7 +19,8 @@ function Order() {
   let price, selectedPizza;
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
-    price = intl.format(selectedPizza.sizes[pizzaSize]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    price = useCurrency(selectedPizza.sizes[pizzaSize]);
   }
 
   async function fetchPizzaTypes() {
