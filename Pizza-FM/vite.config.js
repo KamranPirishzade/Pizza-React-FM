@@ -23,10 +23,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  test: {
-    environment: "happy-dom",
-    coverage: {
-      reporter: ["text", "json", "html"],
-    },
-  },
 });

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,34 +92,34 @@
 <a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import useCurrency from "./useCurrency";
 &nbsp;
 const Cart = ({ cart, checkout }) =&gt; {
   let total = cart.reduce((initial, item) =&gt; {
-<span class="cstat-no" title="statement not covered" >    return initial + item.pizza.sizes[item.size];</span>
+    return initial + item.pizza.sizes[item.size];
   }, 0);
 &nbsp;
   return (
@@ -127,11 +127,11 @@ const Cart = ({ cart, checkout }) =&gt; {
       &lt;h2&gt;Cart&lt;/h2&gt;
       &lt;ul&gt;
         {cart.map((item, index) =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;li key={index}&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;span className="size"&gt;{item.size}&lt;/span&gt;-</span>
-<span class="cstat-no" title="statement not covered" >            &lt;span className="type"&gt;{item.pizza.name}&lt;/span&gt;-</span>
-<span class="cstat-no" title="statement not covered" >            &lt;span className="price"&gt;{item.price}&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/li&gt;</span>
+          &lt;li key={index}&gt;
+            &lt;span className="size"&gt;{item.size}&lt;/span&gt;-
+            &lt;span className="type"&gt;{item.pizza.name}&lt;/span&gt;-
+            &lt;span className="price"&gt;{item.price}&lt;/span&gt;
+          &lt;/li&gt;
         ))}
       &lt;/ul&gt;
       &lt;p&gt;Total:{useCurrency(total)}&lt;/p&gt;
@@ -148,7 +148,7 @@ export default Cart;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-08T19:31:40.403Z
+                at 2025-08-09T05:17:50.762Z
             </div>
         <script src="../prettify.js"></script>
         <script>
