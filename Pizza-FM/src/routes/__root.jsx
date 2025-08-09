@@ -8,10 +8,17 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ErrorBoundary from "../ErrorBoundary";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      experimental_prefetchInRender: true,
+    },
+  },
+});
 
 export const Route = createRootRoute({
   component: () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const cartHook = useState([]);
     return (
       <>

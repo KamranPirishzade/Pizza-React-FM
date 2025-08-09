@@ -17,6 +17,7 @@
     "@tanstack/react-query-devtools": "^5.84.1",
     "@tanstack/react-router": "^1.130.12",
     "@tanstack/react-router-devtools": "^1.130.13",
+    "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "happy-dom": "^18.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

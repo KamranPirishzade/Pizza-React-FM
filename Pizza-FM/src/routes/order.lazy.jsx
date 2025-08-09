@@ -44,22 +44,18 @@ function Order() {
     setLoading(false);
   }
 
+  function addToCart() {
+    setCart([...cart, { pizza: selectedPizza, size: pizzaSize, price }]);
+  }
+
   useEffect(() => {
     fetchPizzaTypes();
   }, []);
   return (
     <div className="order-page">
       <div className="order">
-        <h2>Create order page</h2>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setCart([
-              ...cart,
-              { pizza: selectedPizza, size: pizzaSize, price },
-            ]);
-          }}
-        >
+        <h2>Create order</h2>
+        <form action={addToCart}>
           <div>
             <div>
               <label htmlFor="pizza-type"></label>

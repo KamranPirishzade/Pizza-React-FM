@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from "@tanstack/react-query";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
@@ -6,43 +7,47 @@ import getPastOrder from "../api/getPastOrder";
 import Modal from "../Modal";
 import useCurrency from "../useCurrency";
 import ErrorBoundary from "../ErrorBoundary";
+import { use, Suspense } from "react";
 
 export const Route = createLazyFileRoute("/past")({
   component: ErrorBoundaryPastOrder,
 });
 
 function ErrorBoundaryPastOrder() {
+  const [page, setPage] = useState(1);
+  const loadedPromise = useQuery({
+    queryKey: ["past-orders", page],
+    queryFn: () => getPastOrders(page),
+    staleTime: 30000,
+  }).promise;
   return (
     <ErrorBoundary>
-      <PastOrder />
+      <Suspense
+        fallback={
+          <div className="past-orders">
+            <h2>Loading Past Orders ...</h2>
+          </div>
+        }
+      >
+        <PastOrder
+          loadedPromise={loadedPromise}
+          page={page}
+          setPage={setPage}
+        />
+      </Suspense>
     </ErrorBoundary>
   );
 }
 
-function PastOrder() {
-  const [page, setPage] = useState(1);
+function PastOrder({ loadedPromise, page, setPage }) {
   const [focusedOrder, setFocusedOrder] = useState(null);
-
-  const { isLoading, data } = useQuery({
-    queryKey: ["past-orders", page],
-    queryFn: () => getPastOrders(page),
-    staleTime: 30000,
-  });
-
+  const data = use(loadedPromise);
   const { isLoading: isFocusedLoading, data: focusedOrderData } = useQuery({
     queryKey: ["past-order", focusedOrder],
     queryFn: () => getPastOrder(focusedOrder),
     staleTime: 24 * 60 * 60 * 1000,
     enabled: !!focusedOrder,
   });
-
-  if (isLoading) {
-    return (
-      <div className="past-orders">
-        <h2>Loading...</h2>
-      </div>
-    );
-  }
 
   return (
     <div className="past-orders">
@@ -69,7 +74,7 @@ function PastOrder() {
         </tbody>
       </table>
       <div className="pages">
-        <button disabled={page < 1} onClick={() => setPage(page - 1)}>
+        <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
           Previous
         </button>
         <button disabled={data.length < 10} onClick={() => setPage(page + 1)}>
